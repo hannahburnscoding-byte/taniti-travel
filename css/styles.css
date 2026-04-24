@@ -800,11 +800,128 @@ a:hover {
   resize: vertical;
 }
 
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid rgba(12, 74, 92, 0.2);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  cursor: pointer;
+}
+
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--color-jungle);
   box-shadow: 0 0 0 3px rgba(26, 92, 74, 0.2);
+}
+
+.form-group input.is-invalid,
+.form-group select.is-invalid,
+.form-group textarea.is-invalid {
+  border-color: #b42318;
+}
+
+.field-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #b42318;
+}
+
+.field-error[hidden] {
+  display: none;
+}
+
+.form-alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  outline: none;
+}
+
+.form-alert--error {
+  background: #fef3f2;
+  color: #7a271a;
+  border: 1px solid #fecdca;
+}
+
+.form-alert--success {
+  background: #ecfdf3;
+  color: #054f31;
+  border: 1px solid #a6f4c5;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.booking-form-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--color-white);
+  padding: 2rem 2.25rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(12, 74, 92, 0.08);
+}
+
+.booking-form-card .form-hint {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin: 0 0 1.5rem;
+}
+
+.booking-summary-fallback {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--color-sand);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(12, 74, 92, 0.1);
+}
+
+.booking-summary-fallback pre {
+  margin: 0 0 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  max-height: 220px;
+  overflow: auto;
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.form-check label {
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  cursor: pointer;
 }
 
 .social-links {

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Your Trip to Taniti — Lodging &amp; Travel Request</title>
+    <meta
+      name="description"
+      content="Request dates, lodging, and airport transfer for your Taniti visit. Submit a booking inquiry to the Taniti Tourism Board."
+    />
+    <link rel="canonical" href="https://www.taniti.travel/booking.html" />
+    <meta property="og:title" content="Book your Taniti trip" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0c4a5c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="Taniti home">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 3c-1.5 3-4 5.5-4 9a4 4 0 108 0c0-3.5-2.5-6-4-9zm-1 11h2v7h-2v-7zm-4.5 2.5l1.5 1.2 1.2-1.5-1.5-1.2-1.2 1.5zm9 0l-1.2-1.5-1.5 1.2 1.2 1.5 1.5-1.2z"
+            />
+          </svg>
+          Taniti
+        </a>
+        <nav class="nav-primary" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="things-to-do.html">Things to Do</a>
+          <a href="lodging.html">Lodging</a>
+          <a href="dining.html">Dining</a>
+          <a href="plan-trip.html">Plan Your Trip</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-primary" href="booking.html">Book Now</a>
+          <button
+            type="button"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Open menu"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav id="mobile-nav" class="mobile-drawer" aria-label="Mobile">
+        <a href="index.html">Home</a>
+        <a href="things-to-do.html">Things to Do</a>
+        <a href="lodging.html">Lodging</a>
+        <a href="dining.html">Dining</a>
+        <a href="plan-trip.html">Plan Your Trip</a>
+        <a class="btn btn-primary" href="booking.html" style="margin-top: 0.5rem; text-align: center">Book Now</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="page-hero">
+        <div class="container">
+          <h1>Book your trip</h1>
+          <p class="lead">
+            Send a booking request with your travel dates and preferences. You will review everything in your email app before it is sent.
+          </p>
+        </div>
+      </div>
+
+      <section class="section section-alt" aria-labelledby="booking-form-title">
+        <div class="container">
+          <div class="booking-form-card">
+            <h2 id="booking-form-title" class="prose" style="margin-top: 0; font-family: var(--font-display); color: var(--color-ocean-deep)">
+              Trip request form
+            </h2>
+            <p class="form-hint">
+              Replace the default recipient in the site setup: edit the <code>data-recipient-email</code> attribute on this form in
+              <code>booking.html</code> to your real inbox (for example your tourism office email). Submissions open in the visitor’s mail app.
+            </p>
+
+            <div id="booking-form-alert" class="form-alert" hidden tabindex="-1"></div>
+
+            <!-- Change the email below to where booking requests should go -->
+            <form
+              id="booking-form"
+              data-recipient-email="bookings@taniti.gov"
+              novalidate
+              aria-describedby="booking-form-title"
+            >
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="full_name">Full name *</label>
+                  <input id="full_name" name="full_name" type="text" autocomplete="name" required maxlength="120" />
+                  <span id="full_name-error" class="field-error" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+                  <span id="email-error" class="field-error" hidden></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone (optional)</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+                <span id="phone-error" class="field-error" hidden></span>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="check_in">Check-in *</label>
+                  <input id="check_in" name="check_in" type="date" required />
+                  <span id="check_in-error" class="field-error" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="check_out">Check-out *</label>
+                  <input id="check_out" name="check_out" type="date" required />
+                  <span id="check_out-error" class="field-error" hidden></span>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="adults">Adults *</label>
+                  <input id="adults" name="adults" type="number" min="1" max="20" value="2" required />
+                  <span id="adults-error" class="field-error" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="children">Children</label>
+                  <input id="children" name="children" type="number" min="0" max="20" value="0" />
+                  <span id="children-error" class="field-error" hidden></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lodging_type">Lodging type *</label>
+                <select id="lodging_type" name="lodging_type" required>
+                  <option value="">Select…</option>
+                  <option value="Hostel">Hostel</option>
+                  <option value="Small hotel / family hotel">Small hotel / family hotel</option>
+                  <option value="Bed &amp; breakfast">Bed &amp; breakfast</option>
+                  <option value="Mid-range hotel">Mid-range hotel</option>
+                  <option value="Resort (four-star)">Resort (four-star)</option>
+                  <option value="No preference — please advise">No preference — please advise</option>
+                </select>
+                <span id="lodging_type-error" class="field-error" hidden></span>
+              </div>
+
+              <div class="form-group">
+                <label for="area_preference">Preferred area</label>
+                <select id="area_preference" name="area_preference">
+                  <option value="No preference">No preference</option>
+                  <option value="Taniti City / Yellow Leaf Bay">Taniti City / Yellow Leaf Bay</option>
+                  <option value="Merritton Landing">Merritton Landing</option>
+                  <option value="Near airport">Near airport</option>
+                  <option value="Quieter / outside town">Quieter / outside town</option>
+                </select>
+              </div>
+
+              <div class="form-check">
+                <input id="airport_transfer" name="airport_transfer" type="checkbox" value="yes" />
+                <label for="airport_transfer">I am interested in airport transfer options</label>
+              </div>
+
+              <div class="form-group">
+                <label for="arrival_info">Flight or ferry arrival (optional)</label>
+                <input
+                  id="arrival_info"
+                  name="arrival_info"
+                  type="text"
+                  maxlength="200"
+                  placeholder="e.g. Flight AB123, approx. 2:30 PM"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="requests">Special requests or questions</label>
+                <textarea id="requests" name="requests" maxlength="800" placeholder="Dietary needs, tours, accessibility, rooming, etc."></textarea>
+              </div>
+
+              <div class="form-check">
+                <input id="consent" name="consent" type="checkbox" value="yes" required />
+                <label for="consent">I confirm that my details are correct and I am ready to send this request by email. *</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Open email to send request</button>
+              <a class="btn btn-secondary" href="faq.html" style="margin-left: 0.5rem">Travel FAQs</a>
+            </form>
+
+            <div id="booking-summary-fallback" class="booking-summary-fallback" hidden>
+              <p style="margin: 0 0 0.5rem; font-weight: 600; font-size: 0.875rem">Request summary</p>
+              <pre id="booking-summary-text"></pre>
+              <button type="button" class="btn btn-secondary" id="booking-copy-summary">Copy request text</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <a class="footer-brand" href="index.html">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color: #7ec8b8">
+            <path
+              d="M12 3c-1.5 3-4 5.5-4 9a4 4 0 108 0c0-3.5-2.5-6-4-9zm-1 11h2v7h-2v-7zm-4.5 2.5l1.5 1.2 1.2-1.5-1.5-1.2-1.2 1.5zm9 0l-1.2-1.5-1.5 1.2 1.2 1.5 1.5-1.2z"
+            />
+          </svg>
+          Taniti
+        </a>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="contact.html">Contact</a>
+          <span class="sep" aria-hidden="true">|</span>
+          <a href="faq.html">FAQs</a>
+          <span class="sep" aria-hidden="true">|</span>
+          <a href="faq.html#travel">Travel Info</a>
+          <span class="sep" aria-hidden="true">|</span>
+          <a href="contact.html#social">Social Links</a>
+        </nav>
+        <p class="footer-copy">© Taniti Tourism Board. Information for visitors planning a trip to Taniti.</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
+  </body>
+</html>
