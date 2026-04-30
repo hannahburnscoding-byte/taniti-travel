@@ -5,30 +5,62 @@
   var mobileDrawer = document.querySelector(".mobile-drawer");
 
   if (menuToggle && mobileDrawer) {
+    var backdrop = document.getElementById("mobile-nav-backdrop");
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.id = "mobile-nav-backdrop";
+      backdrop.className = "mobile-nav-backdrop";
+      backdrop.setAttribute("tabindex", "-1");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.appendChild(backdrop);
+    }
+
+    function setNavOpen(open) {
+      mobileDrawer.classList.toggle("is-open", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      mobileDrawer.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.classList.toggle("mobile-nav-open", open);
+      backdrop.classList.toggle("is-active", open);
+      backdrop.setAttribute("aria-hidden", open ? "false" : "true");
+    }
+
     mobileDrawer.setAttribute("aria-hidden", "true");
 
     menuToggle.addEventListener("click", function () {
-      var open = mobileDrawer.classList.toggle("is-open");
-      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      mobileDrawer.setAttribute("aria-hidden", open ? "false" : "true");
+      var open = !mobileDrawer.classList.contains("is-open");
+      setNavOpen(open);
+    });
+
+    backdrop.addEventListener("click", function () {
+      if (mobileDrawer.classList.contains("is-open")) {
+        setNavOpen(false);
+        menuToggle.focus();
+      }
     });
 
     mobileDrawer.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        mobileDrawer.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        mobileDrawer.setAttribute("aria-hidden", "true");
+        setNavOpen(false);
       });
     });
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && mobileDrawer.classList.contains("is-open")) {
-        mobileDrawer.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        mobileDrawer.setAttribute("aria-hidden", "true");
+        setNavOpen(false);
         menuToggle.focus();
       }
     });
+
+    window.addEventListener(
+      "resize",
+      function () {
+        if (window.matchMedia("(min-width: 900px)").matches) {
+          setNavOpen(false);
+        }
+      },
+      { passive: true }
+    );
   }
 
   document.querySelectorAll(".faq-item button").forEach(function (btn) {
