@@ -72,7 +72,7 @@
         <div class="container">
           <h1>Book your trip</h1>
           <p class="lead">
-            Send a booking request with your travel dates and preferences. You will review everything in your email app before it is sent.
+            Send a booking request with your travel dates and preferences. Submit the form and we will follow up about availability.
           </p>
         </div>
       </div>
@@ -84,16 +84,13 @@
               Trip request form
             </h2>
             <p class="form-hint">
-              Replace the default recipient in the site setup: edit the <code>data-recipient-email</code> attribute on this form in
-              <code>booking.html</code> to your real inbox (for example your tourism office email). Submissions open in the visitor’s mail app.
+              Complete the fields below and submit your trip details. You will see a confirmation when your request has been received.
             </p>
 
             <div id="booking-form-alert" class="form-alert" hidden tabindex="-1"></div>
 
-            <!-- Change the email below to where booking requests should go -->
             <form
               id="booking-form"
-              data-recipient-email="bookings@taniti.gov"
               novalidate
               aria-describedby="booking-form-title"
             >
@@ -190,18 +187,12 @@
 
               <div class="form-check">
                 <input id="consent" name="consent" type="checkbox" value="yes" required />
-                <label for="consent">I confirm that my details are correct and I am ready to send this request by email. *</label>
+                <label for="consent">I confirm that my details are correct and I am ready to submit this request. *</label>
               </div>
 
-              <button type="submit" class="btn btn-primary">Open email to send request</button>
+              <button type="submit" class="btn btn-primary">Submit request</button>
               <a class="btn btn-secondary" href="faq.html" style="margin-left: 0.5rem">Travel FAQs</a>
             </form>
-
-            <div id="booking-summary-fallback" class="booking-summary-fallback" hidden>
-              <p style="margin: 0 0 0.5rem; font-weight: 600; font-size: 0.875rem">Request summary</p>
-              <pre id="booking-summary-text"></pre>
-              <button type="button" class="btn btn-secondary" id="booking-copy-summary">Copy request text</button>
-            </div>
           </div>
         </div>
       </section>

@@ -5,8 +5,7 @@
   if (!form) return;
 
   var alertBox = document.getElementById("booking-form-alert");
-  var summaryPre = document.getElementById("booking-summary-text");
-  var copyBtn = document.getElementById("booking-copy-summary");
+  var submitBtn = form.querySelector('button[type="submit"]');
 
   function showAlert(message, isError) {
     if (!alertBox) return;
@@ -14,7 +13,7 @@
     alertBox.textContent = message;
     alertBox.classList.toggle("form-alert--error", !!isError);
     alertBox.classList.toggle("form-alert--success", !isError);
-    alertBox.setAttribute("role", "alert");
+    alertBox.setAttribute("role", isError ? "alert" : "status");
     alertBox.focus();
   }
 
@@ -39,28 +38,14 @@
     }
   }
 
-  function buildSummary(fd) {
-    var lines = [
-      "Taniti — booking request",
-      "------------------------",
-      "Name: " + fd.get("full_name"),
-      "Email: " + fd.get("email"),
-      "Phone: " + (fd.get("phone") || "—"),
-      "Check-in: " + fd.get("check_in"),
-      "Check-out: " + fd.get("check_out"),
-      "Guests: " + fd.get("adults") + " adults, " + fd.get("children") + " children",
-      "Lodging: " + fd.get("lodging_type"),
-      "Area: " + fd.get("area_preference"),
-      "Airport transfer: " + (fd.get("airport_transfer") ? "Yes" : "No"),
-      "Flight arrival (if known): " + (fd.get("arrival_info") || "—"),
-      "Notes: " + (fd.get("requests") || "—"),
-    ];
-    return lines.join("\n");
-  }
-
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     clearFieldErrors();
+
+    if (alertBox) {
+      alertBox.hidden = true;
+      alertBox.classList.remove("form-alert--error", "form-alert--success");
+    }
 
     var fd = new FormData(form);
     var fullName = (fd.get("full_name") || "").toString().trim();
@@ -106,7 +91,7 @@
     }
     var consentEl = document.getElementById("consent");
     if (!consentEl || !consentEl.checked) {
-      showAlert("Please confirm that your details are correct before sending.", true);
+      showAlert("Please confirm that your details are correct before submitting.", true);
       ok = false;
     }
 
@@ -115,56 +100,22 @@
       return;
     }
 
-    var recipient = (form.getAttribute("data-recipient-email") || "").trim();
-    if (!recipient || recipient.indexOf("@") === -1) {
-      showAlert(
-        "Booking email is not configured. Set data-recipient-email on the form to your inbox address.",
-        true
-      );
-      return;
+    var originalLabel = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
     }
 
-    var summary = buildSummary(fd);
-    var subject = encodeURIComponent("Taniti booking request — " + fullName + " — " + checkIn);
-    var body = encodeURIComponent(summary);
-    var mailto = "mailto:" + encodeURIComponent(recipient) + "?subject=" + subject + "&body=" + body;
-
-    if (mailto.length > 1900) {
-      body = encodeURIComponent(summary.slice(0, 1500) + "\n…(trimmed; see copied summary below)");
-      mailto = "mailto:" + encodeURIComponent(recipient) + "?subject=" + subject + "&body=" + body;
-    }
-
-    if (summaryPre) summaryPre.textContent = summary;
-    var fall = document.getElementById("booking-summary-fallback");
-    if (fall) fall.hidden = false;
-
-    showAlert(
-      "Your email app should open with this request ready to send. If nothing opens, copy the summary below and email " +
-        recipient +
-        " manually.",
-      false
-    );
-
-    setTimeout(function () {
-      window.location.href = mailto;
-    }, 250);
-  });
-
-  if (copyBtn && summaryPre) {
-    copyBtn.addEventListener("click", function () {
-      var text = summaryPre.textContent || "";
-      if (!text) return;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function () {
-          copyBtn.textContent = "Copied!";
-          setTimeout(function () {
-            copyBtn.textContent = "Copy request text";
-          }, 2000);
-        });
-      } else {
-        summaryPre.select();
-        document.execCommand("copy");
+    window.setTimeout(function () {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
       }
-    });
-  }
+      form.reset();
+      showAlert(
+        "Thank you! Your booking request has been submitted. We will confirm availability by email within two business days.",
+        false
+      );
+    }, 900);
+  });
 })();
